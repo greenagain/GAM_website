@@ -1,130 +1,72 @@
+
 <!doctype html>
-<html lang='en-us'>
-
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-<meta charset="utf-8">
+  <meta charset="utf-8">
 
-    <meta name='description' content='Official website for Green Again.'>
-    <link rel='stylesheet' type='text/css' href='home.css'>
-    <title>
-    {% block title %}
-    Green Again
+  <title>{% block page_title %}
+  
+    green_again_flask
+  
     {% endblock %}
-    </title>
-    <meta name="description" content="{% block meta_description %}{% endblock %}">
-    <meta name="author" content="{% block meta_author %}{% endblock %}">
+  </title>
+  <meta name="description" content="{% block meta_description %}{% endblock %}">
+  <meta name="author" content="{% block meta_author %}{% endblock %}">
+
+  <!-- Mobile viewport optimized: h5bp.com/viewport -->
+  <meta name="viewport" content="width=device-width">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='libs/font-awesome4/css/font-awesome.min.css') }}">
+  {% assets "css_all" %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}">
+  {% endassets %}
+
+  {% block css %}{% endblock %}
 
 </head>
-
 <body class="{% block body_class %}{% endblock %}">
-    % block body %}
-    {% with form=form  %}
-    {% include "nav.html" %}
+{% block body %}
+{% with form=form  %}
+{% include "nav.html" %}
+{% endwith %}
+
+<header>{% block header %}{% endblock %}</header>
+<div class="{% block content_class %}container{% endblock content_class %}">
+
+  <div role="main">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="row">
+      <div class="col-md-12">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+          <a class="close" title="Close" href="#" data-dismiss="alert">&times;</a>
+         {{message}}
+        </div><!-- end .alert -->
+        {% endfor %}
+      </div><!-- end col-md -->
+    </div><!-- end row -->
+        {% endif %}
     {% endwith %}
-    <!-- navbar template -->
-    <!-- footer -->
-    <div id='top' class='height-full' style='background-image: url(/img_src/home_cover.jpg)'>
 
+    {% block content %}{% endblock %}
+  </div>
 
-
-        <p>
-            <span class='headline-size'>Green Again: Madagascar</span>
-            <br><br><br><br>
-            <span class='title-size'>Restoring Forest Habitats</span>
-        </p>
-        <div id='top-join-us'>
-            <a href='http://eepurl.com/bR6YoL' target="_blank"><div class='button' id='button-join-us'>JOIN US</div></a>
-        </div>
-    </div>
-
-    <div class='section-container first-sec'>
-        <div class='section-title title-size'>Why Madagascar</div>
-        <div class='stat-triptych triptych'>
-            <p class='stat-number'><span class='counter'>3</span>%</p>
-            <p class='stat-desc'>of the world’s entire biodiversity is found only in Madagascar</p>
-        </div>
-        <div class='stat-triptych triptych'>
-            <p class='stat-number'><span class='counter'>87</span>%</p>
-            <p class='stat-desc'>of Madagascar's rainforest have been lost in the last 100 years</p>
-        </div>
-        <div class='stat-triptych triptych'>
-            <p class='stat-number'><span class='counter'>11</span>%</p>
-            <p class='stat-desc'>of the original rainforests are all that currently remain</p>
-        </div>
-    </div>
-
-    <div class='green-back section-container' id='mission-statement'>
-        <div class='section-title title-size'>Our Mission</div>
-        <div class='accent-size align-left'>We seek to replant an area of Madagascar's rain forest burned down by an unnatural forest fire as well as encourage cultural understanding through a real world demonstration of how to live sustainably.</div>
-    </div>
-
-    <div class='section-container'>
-        <div class='section-title title-size'>Our Impact</div>
-        <div class='pad-below-3em'>
-            <div class='stat-triptych triptych'>
-                <p class='stat-number'><span class='counter'>12,637</span></p>
-                <p class='stat-desc'>trees planted in restoration areas</p>
-            </div>
-            <div class='stat-triptych triptych'>
-                <p class='stat-number'><span class='counter'>3,103</span></p>
-                <p class='stat-desc'>one-year-old seedlings growing</p>
-            </div>
-            <div class='stat-triptych triptych'>
-                <p class='stat-number'><span class='counter'>4,536</span></p>
-                <p class='stat-desc'>wild-nursery trees ready for planting</p>
-            </div>
-        </div>
-        <a href='https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=SJQDUHJ9MWVRS&lc=US&item_name=Green%20Again%20Madagascar&item_number=Ivoloina%20Park%20Project&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted'><div class='button vertical-center' target="_blank">DONATE</div></a>
-    </div>
-
-    <div class='green-back section-container' id='learn-more'>
-        <div class='section-title title-size'>Learn More</div>
-        <a href='/work'><div class='home-link triptyc'>
-            <img src='/img_src/learn_more_project.jpg'/>
-            <p>Our Work</p>
-        </div></a>
-        <div class='home-link triptyc'>
-            <img src='/img_src/learn_more_data.jpg'/>
-            <p>Data (coming soon)</p>
-        </div>
-        <a href='/about'><div class='home-link triptyc'>
-            <img src='/img_src/learn_more_about.jpg'/>
-            <p>About</p>
-        </div></a>
-    </div>
-
-    <div class='section-container last-sec'>
-        <div class='section-title title-size'>How You Can Get Involved</div>
-        <div class='pad-below-3em'>
-            <p class='section-title subtitle-size'>Spread the word</p>
-            <a href='https://www.facebook.com/GreenAgainMadagascar' target="_blank"><div class='circle-button triptych'>
-                <img src='/icon_src/fb_logo.png'/>
-            </div></a>
-            <div class='circle-button triptych'>
-                <img src='/icon_src/twitter_logo.png'/>
-            </div>
-            <div class='circle-button triptych'>
-                <img src='/icon_src/instg_logo.png'/>
-            </div>
-        </div>
-        <div>
-            <p class='section-title subtitle-size'>Get in touch: we'd love to hear from you</p>
-            <a href='http://eepurl.com/bR6YoL' target="_blank"><div class='button' id='button-join-us'>JOIN US</div></a>
-        </div>
-    </div>
-
+</div><!-- end container -->
 
 {% include "footer.html" %}
-    <script src='/home.js'></script>
 
-    <!-- Counter up API: https://github.com/bfintal/Counter-Up -->
-    <script src="/scripts/waypoints.min.js"></script>
-    <script src="/scripts/jquery.counterup.min.js"></script>
-    {% assets "js_all" %}
-        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-    {% endassets %}
-    {% block js %}{% endblock %}
-    <!-- end scripts -->
-    
+<!-- JavaScript at the bottom for fast page loading -->
+{% assets "js_all" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+{% block js %}{% endblock %}
+<!-- end scripts -->
+{% endblock %}
 </body>
 </html>
+
