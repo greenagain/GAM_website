@@ -8,6 +8,7 @@ from GAM_website.extensions import bcrypt, cache, csrf_protect, db, debug_toolba
 from GAM_website.settings import ProdConfig
 
 
+
 def create_app(config_object=ProdConfig):
     """An application factory, as explained here: http://flask.pocoo.org/docs/patterns/appfactories/.
 

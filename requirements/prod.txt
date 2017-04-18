@@ -22,6 +22,7 @@ WTForms==2.1
 
 # Deployment
 gunicorn>=19.1.1
+python-dotenv==0.6.4
 
 # Assets
 Flask-Assets==0.12

@@ -1,11 +1,16 @@
 # -*- coding: utf-8 -*-
 """Application configuration."""
 import os
-
+from os.path import join, dirname
+from dotenv import load_dotenv, find_dotenv
 
 class Config(object):
     """Base configuration."""
 
+
+
+    dotenv_path = join(dirname(__file__), '.env')
+    load_dotenv(find_dotenv())
     SECRET_KEY = os.environ.get('GAM_WEBSITE_SECRET', 'secret-key')  # TODO: Change me
     APP_DIR = os.path.abspath(os.path.dirname(__file__))  # This directory
     PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir))
