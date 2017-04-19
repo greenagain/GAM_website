@@ -1,0 +1,48 @@
+#nav-bar {
+    width: 90%;
+    height: 3em;
+    padding: .75em 5% .75em 5%;
+    background-color: #FFFFFF;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+}
+
+#nav-bar img {
+    max-height: 3em;
+    display: inline-block;
+    float: left;
+}
+
+#nav-bar > * {
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+#nav-container {
+    display: inline-block;
+    float: right;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+    height: 100%
+}
+
+#nav-bar-shadow {
+    height: 2px;
+    width: 100%;
+    background-color: #DCECCC;
+    position: fixed;
+    top: 4.5em;
+    z-index: 5;
+}
+
+.nav-item {
+    padding: 0;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 0 0 1.5em;
+    font-size: 1.2em;
+    color: #000000;
+}

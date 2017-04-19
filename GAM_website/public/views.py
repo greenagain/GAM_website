@@ -11,9 +11,9 @@ from GAM_website.utils import flash_errors
 
 blueprint = Blueprint('public', __name__, static_folder='../static')
 
-@blueprint.route('/', methods=['GET'])
-def index():
-    return redirect(url_for('payments.donate'))
+# @blueprint.route('/', methods=['GET'])
+# def index():
+#     return redirect(url_for('payments.donate'))
 
 @login_manager.user_loader
 def load_user(user_id):
