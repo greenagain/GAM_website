@@ -1,5 +1,4 @@
 {% block content %}
-
 <div class="wrapper">
   <div class="checkout container">
 
@@ -64,6 +63,7 @@
 </div>
 
 <script src="https://js.braintreegateway.com/js/braintree-2.27.0.min.js"></script>
+  <script src="{{ url_for('static', filename='payments/javascript/demo.js') }}"></script>
 <script>
   var checkout = new Demo({
     formID: 'payment-form'
