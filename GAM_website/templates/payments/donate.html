@@ -1,9 +1,7 @@
-<meta name="viewport" content="width=device-width">
+{% extends "layout.html" %}
 
 <link rel="stylesheet" href="{{ url_for('static', filename='libs/font-awesome4/css/font-awesome.min.css') }}">
-{% assets "css_all" %}
-  <link rel="stylesheet" href="{{ ASSET_URL }}">
-{% endassets %}
+
 
   <div class="page-header">
     <h1>GAM Payments Sandbox</h1>
