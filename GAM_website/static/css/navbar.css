@@ -1,6 +1,5 @@
 #nav-bar {
     width: 90%;
-    height: 3em;
     padding: .75em 5% .75em 5%;
     background-color: #FFFFFF;
     display: block;
@@ -11,7 +10,7 @@
 }
 
 #nav-bar img {
-    max-height: 3em;
+    max-height: 5em;
     display: inline-block;
     float: left;
 }
