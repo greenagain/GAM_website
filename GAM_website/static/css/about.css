@@ -1,0 +1,51 @@
+.circle-button {
+    border-radius: 50%;
+    height: 4em;
+    width: 4em;
+    padding: 1.5em;
+    margin: 0 1.5em 0 1em;
+    background: #00B0FF;
+    display: inline-block;
+}
+
+.circle-button > img {
+    height: 100%;
+}
+
+.input-email {
+    width: 30%;
+    margin-right: -.2em;
+    padding: .2em .5em .43em .5em;
+    font-size: 120%;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.bio-section {
+    width: 100%;
+    padding-bottom: 1em;
+}
+
+.bio-photo-wrapper {
+    width: 30%;
+}
+
+.bio-body-wrapper {
+    width: 65%;
+}
+
+.bio-padding-wrapper {
+    width: 5%;
+}
+
+.bio-photo {
+    width: 100%;
+}
+
+.bio-text {
+    text-align: left;
+}
+
+.bio-name {
+    font-size: 1.5em;
+    color: #5E8F3A;
+}
