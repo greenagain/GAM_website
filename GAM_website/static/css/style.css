@@ -58,11 +58,11 @@ footer {
 }
 
 footer a {
-  color: #999999;
+  /*color: #999999;*/
 }
 
 footer p {
-  float: right;
+  /*float: right;*/
   margin-right: 25px;
 }
 

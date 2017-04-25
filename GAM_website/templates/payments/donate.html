@@ -1,6 +1,15 @@
 {% extends "layout.html" %}
-{% include 'payments/checkouts/donate_form.html' %}
+{% block content %}
 
+
+<div class="container">
+  <h2>Simple Collapsible</h2>
+  <a href="#demo" class="btn btn-info" data-toggle="collapse">Simple collapsible</a>
+  <div id="demo" class="collapse">
+{% include 'payments/checkouts/donate_form.html' %}
+  </div>
+</div>
+{% endblock %}
 {% block js %}
 
 <script src="https://js.braintreegateway.com/js/braintree-2.27.0.min.js"></script>
@@ -19,5 +28,8 @@
       }
     }
   });
+
+
+
 </script>
 {% endblock %}
