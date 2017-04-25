@@ -68,6 +68,8 @@ eggs/
 lib/
 lib64/
 parts/
+
+node_modules
 sdist/
 var/
 *.egg-info/
@@ -109,3 +111,4 @@ docs/_build/
 # PyBuilder
 target/
 
+GAM_website/static/node_modules
