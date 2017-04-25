@@ -1,0 +1,24 @@
+
+{% block js %}
+
+<script src="https://js.braintreegateway.com/js/braintree-2.27.0.min.js"></script>
+<script src="{{ url_for('static', filename='payments/javascript/demo.js') }}"></script>
+<script>
+  var checkout = new Demo({
+    formID: 'payment-form'
+  })
+
+  var client_token = '{{ client_token }}';
+  braintree.setup(client_token, "dropin", {
+    container: "bt-dropin",
+    paypal: {
+        button: {
+          type: 'checkout'
+      }
+    }
+  });
+
+
+
+</script>
+{% endblock %}

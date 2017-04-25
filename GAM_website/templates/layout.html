@@ -63,7 +63,7 @@
 {% endassets %}
 {% block js %}
 <!-- jQuery -->
-<script src="static/vendor/jquery/jquery.min.js"></script>
+<script src="static/vendor/jquery/jquery.min.js" ></script>
 
 <!-- Bootstrap Core JavaScript -->
 <script src="static/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -75,11 +75,15 @@
 <script src="static/js/jqBootstrapValidation.js"></script>
 <script src="static/js/contact_me.js"></script>
 
+
 <!-- Theme JavaScript -->
 <script src="static/js/agency.min.js"></script>
 {% endblock %}
 <!-- end scripts -->
 {% endblock %}
+
+{% include "./payments/donate_footer.html" %}
+
 
 </body>
 </html>

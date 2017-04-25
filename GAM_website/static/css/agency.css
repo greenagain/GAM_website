@@ -52,6 +52,9 @@ h6 {
 .bg-light-gray {
   background-color: #eeeeee;
 }
+.bg-light-green {
+  background-color: #DCECCC;
+}
 .bg-darkest-gray {
   background-color: #222222;
 }
@@ -298,7 +301,11 @@ section h3.section-subheading {
     padding: 150px 0;
   }
 }
-.service-heading {
+.why-heading {
+  margin: 15px 0;
+  text-transform: none;
+}
+.why-heading {
   margin: 15px 0;
   text-transform: none;
 }
