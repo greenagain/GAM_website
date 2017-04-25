@@ -10,6 +10,7 @@ css = Bundle(
     'css/footer.css',
     'css/public.css',
     'css/home.css',
+    'css/agency.css',
     filters='cssmin',
     output='public/css/common.css'
 )

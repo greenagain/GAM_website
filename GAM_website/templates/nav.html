@@ -1,28 +1,65 @@
 <!-- <link rel='stylesheet' type='text/css' href='static/public/css/navbar.css'> -->
+<nav id="mainNav" class="navbar navbar-inverse navbar-custom navbar-fixed-top">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-left" href="#page-top"><img src='{{ url_for('static', filename="public/icon_src/ga_logo.png") }}' alt="Green Again" width="250px" height="60px"></a>
 
-<nav class="navbar-inverse navbar navbar-fixed-top" role="navigation" id='nav-bar'>
-  <div class="container-fluid">
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="hidden">
+                    <a href="#page-top"></a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#services">Services</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#portfolio">Portfolio</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#about">About</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#team">Team</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+<!-- <nav class="navbar-inverse navbar navbar-fixed-top" role="navigation" id='nav-bar'>
+  <div class="container-fluid"> -->
 
   <!-- Brand and toggle get grouped for better mobile display -->
-  <div class="navbar-header">
+  <!-- <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
       <span class="sr-only">Toggle navigation</span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a href="/" class="navbar-left"><img src='{{ url_for('static', filename="public/icon_src/ga_logo.png") }}' class="img-responsive" alt="Green Again"></a>
+    <a href="/" class="navbar-left"><img src='{{ url_for('static', filename="public/icon_src/ga_logo.png") }}' class="img-responsive" alt="Green Again"></a> -->
     <!-- <a class="navbar-brand" href="{{ url_for('public.home') }}"> -->
-    </a>
-  </div>
+    <!-- </a>
+  </div> -->
   <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse navbar-ex1-collapse">
+  <!-- <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav navbar-right" id='nav-item'>
       <li><a href="{{ url_for('public.home') }}">Home</a></li>
       <li><a href="{{ url_for('public.about') }}">About</a></li>
       <li><a href="{{ url_for('payments.donate') }}">Donate</a></li>
 
-    </ul>
+    </ul> -->
     <!-- when we add user functionality in the future
     {% if current_user and current_user.is_authenticated %}
     <ul class="nav navbar-nav navbar-right">
@@ -46,7 +83,7 @@
     </form>
     {% endif %}
 -->
-  </div><!-- /.navbar-collapse -->
+  <!-- </div><!-- /.navbar-collapse -->
 
-  </div><!-- /.container -->
-</nav>
+  <!-- </div><!-- /.container -->
+<!-- </nav> -->
