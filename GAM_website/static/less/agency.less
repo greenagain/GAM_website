@@ -17,7 +17,7 @@ body {
 }
 
 p {
-    font-size: 14px;
+    font-size: 1.2em;
     line-height: 1.75;
 }
 
@@ -242,7 +242,7 @@ section {
 
 @media(min-width:768px) {
     section {
-        padding: 150px 0;
+        padding: 80px 0;
     }
 }
 
@@ -345,7 +345,7 @@ section {
         position: absolute;
         content: "";
         width: 2px;
-        background-color: #f1f1f1;
+        background-color: @theme-green;
         left: 40px;
         margin-left: -1.5px;
     }
@@ -383,14 +383,14 @@ section {
         .timeline-image {
             left: 0;
             margin-left: 0;
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             position: absolute;
             z-index: 100;
             background-color: @theme-primary;
             color: white;
             border-radius: 100%;
-            border: 7px solid #f1f1f1;
+            border: 4px solid @theme-light-green;
             text-align: center;
             h4 {
                 font-size: 10px;
@@ -451,8 +451,8 @@ section {
                 text-align: right;
             }
             .timeline-image {
-                width: 100px;
-                height: 100px;
+                width: 135px;
+                height: 135px;
                 left: 50%;
                 margin-left: -50px;
                 h4 {
@@ -478,8 +478,8 @@ section {
                 padding: 0 20px 20px;
             }
             .timeline-image {
-                width: 150px;
-                height: 150px;
+                width: 160px;
+                height: 160px;
                 margin-left: -75px;
                 h4 {
                     font-size: 18px;
@@ -547,9 +547,10 @@ aside.clients {
 
 section#contact {
     background-color: @gray-darker;
-    background-image: url('../img/map-image.png');
+    background-image: url('../img/img_src/archive/static6 copy.jpg');
     background-position: center;
     background-repeat: no-repeat;
+    background-size: cover;
     .section-heading {
         color: white;
     }
@@ -561,6 +562,7 @@ section#contact {
         }
         input.form-control {
             height: auto;
+
         }
         textarea.form-control {
             height: 236px;
@@ -573,22 +575,22 @@ section#contact {
     ::-webkit-input-placeholder {
        .heading-font;
        font-weight: 700;
-       color: @gray-lighter;
+       color: @theme-green;
     }
     :-moz-placeholder { /* Firefox 18- */
        .heading-font;
        font-weight: 700;
-       color: @gray-lighter;
+       color: @theme-green;
     }
     ::-moz-placeholder {  /* Firefox 19+ */
        .heading-font;
        font-weight: 700;
-       color: @gray-lighter;
+       color: @theme-green;
     }
     :-ms-input-placeholder {
        .heading-font;
        font-weight: 700;
-       color: @gray-lighter;
+       color: @theme-green;
     }
     .text-danger {
         color: @theme-danger;
