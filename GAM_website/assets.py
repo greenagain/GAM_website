@@ -27,6 +27,7 @@ css = Bundle(
 
 js = Bundle(
     'libs/jquery/dist/jquery.js',
+    "https://use.fontawesome.com/f5c804bdc2.js",
     'libs/bootstrap/dist/js/bootstrap.js',
     'js/plugins.js',
     'js/agency.js',
