@@ -13,6 +13,7 @@ less = Bundle(
 
 css = Bundle(
     'libs/bootstrap/dist/css/bootstrap.css',
+    'libs/font-awesome4/css/font-awesome.min.css',
     'css/style.css',
     'css/navbar.css',
     'css/footer.css',
@@ -32,7 +33,7 @@ js = Bundle(
     'js/home.js',
     'js/jqBootstrapValidation.js',
     'js/contact_me.js',
-    'js/scripts/waypoints.min.js',
+    'js/waypoints.min.js',
     filters='jsmin',
     output='public/js/common.js'
 )
