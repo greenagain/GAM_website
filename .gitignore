@@ -6,7 +6,6 @@
 # Packages
 *.egg
 *.egg-info
-build
 eggs
 parts
 bin
@@ -59,7 +58,6 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
-build/
 develop-eggs/
 dist/
 downloads/
