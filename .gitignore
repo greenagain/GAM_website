@@ -110,3 +110,7 @@ docs/_build/
 target/
 
 GAM_website/static/node_modules
+GAM_website/Scripts/activate
+*.bat
+GAM_website/Scripts/deactivate
+GAM_website/Scripts/conda
