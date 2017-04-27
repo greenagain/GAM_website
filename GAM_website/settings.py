@@ -7,8 +7,6 @@ from dotenv import load_dotenv, find_dotenv
 class Config(object):
     """Base configuration."""
 
-
-
     dotenv_path = join(dirname(__file__), '../.env')
     load_dotenv(dotenv_path)
     SECRET_KEY = os.environ.get('GAM_WEBSITE_SECRET')  # TODO: Change me
