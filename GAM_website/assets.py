@@ -34,6 +34,7 @@ js = Bundle(
     'js/jqBootstrapValidation.js',
     'js/contact_me.js',
     'js/waypoints.min.js',
+    'js/jquery.easing.js',
     filters='jsmin',
     output='public/js/common.js'
 )
