@@ -35,7 +35,7 @@ def donate():
 @blueprint.route('/payments/checkouts/new', methods=['GET'])
 def new_checkout():
     client_token = braintree.ClientToken.generate()
-    return render_template('payments/checkouts/new.html', client_token=client_token)
+    return render_template('payments/donate.html', client_token=client_token)
 
 @blueprint.route('/payments/checkouts/<transaction_id>', methods=['GET'])
 def show_checkout(transaction_id):

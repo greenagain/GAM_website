@@ -1,0 +1,89 @@
+#top-join-us {
+    padding: 1.5em 5% 1.5em 5%;
+    position: absolute;
+    bottom: 0;
+    width: 90%;
+    vertical-align: middle;
+    text-align: center;
+    background: rgba(26, 26, 26, 0.85);
+}
+
+.input-email {
+    width: 30%;
+    margin-right: -.2em;
+    padding: .2em .5em .43em .5em;
+    font-size: 120%;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#mission-statement {
+    background-color: #DCECCC;
+}
+
+#learn-more {
+    background-color: #DCECCC;
+}
+
+.triptych {
+    width: 30%;
+    padding: 0 1% 0 1%;
+    display: inline-block;
+    vertical-align:top;
+}
+
+.stat-number {
+    font-size: 400%;
+    font-family: 'Open Sans', sans-serif;
+    color: #5E8F3A;
+    font-weight: 600;
+}
+
+.stat-desc {
+    font-size: 1em;
+    font-family: 'Open Sans', sans-serif;
+    color: #000000;
+}
+
+.circle-button {
+    border-radius: 50%;
+    height: 4em;
+    width: 4em;
+    padding: 1.5em;
+    margin: 0 1.5em 0 1em;
+    background: #00B0FF;
+    display: inline-block;
+}
+
+.circle-button > img {
+    height: 100%;
+}
+
+.learn-more {
+    width: 30%;
+    padding: 0 1% 0 1%;
+    display: inline-block;
+    vertical-align:top;
+}
+
+.home-link {
+    width: 30%;
+    padding: 0 1% 0 1%;
+    display: inline-block;
+    vertical-align:top;
+}
+
+.home-link > img {
+    width: 100%;
+}
+
+.home-link > p {
+    position: relative;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #FFFFFF;
+    font-size: 1.5em;
+    float: right;
+    bottom: 75px;
+    right: 0;
+    padding: 3% 10% 3% 5%;
+    background-color: #26361B;
+}

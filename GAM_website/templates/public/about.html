@@ -1,12 +1,116 @@
-
-{% extends "layout.html" %}
-
-{% block content %}
-<div class="body-content">
+{% block about %}
+<div class="container">
     <div class="row">
-      <h1>About</h1>
-      <p>This template was created by <a href="http://github.com/sloria/">Steven Loria</a> for use with the <a href="http://github.com/audreyr/cookiecutter/">cookiecutter</a> package by <a href="http://github.com/audreyr/">Audrey Roy</a>.</p>
+        <div class="col-lg-12 text-center">
+            <h2 class="section-heading">About Us</h2>
+            <!-- <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3> -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <ul class="timeline">
+                <li>
+                    <div class="timeline-image">
+                        <img class="img-circle img-responsive" src="static/img/img_src/archive/fire.jpg" alt="">
+                    </div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4>November 2013</h4>
+                            <h4 class="subheading">Forest Fire</h4>
+                        </div>
+                        <div class="timeline-body">
+                            <p class="text-muted">In November 2013, a man's charcoal fire burned out of control, starting a massive forest fire on the Eastern coast of Madagascar. The fire ravaged the man's land as well as over 20 acres of nearby rain forest of Parc Ivoloina, one of the most widely visited forest reserves in Africa.</p>
+                        </div>
+                    </div>
+                </li>
+                <li class="timeline-inverted">
+                    <div class="timeline-image">
+                        <img class="img-circle img-responsive" src="static/img/img_src/static4.jpg" alt="">
+                    </div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4>2014</h4>
+                            <h4 class="subheading">Green Again Madagascar is formed</h4>
+                        </div>
+                        <div class="timeline-body">
+                            <p class="text-muted">Green Again formed in response to this tragedy. With support from park management and academic advisers at the University of Tamatave, Green Again is working to restore the burned areas in Parc Ivoloina by 2019.</p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="timeline-image">
+                        <img class="img-circle img-responsive" src="static/img/img_src/static7.jpg" alt="">
+                    </div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4>Today</h4>
+                            <!-- <h4 class="subheading">Transition to Full Service</h4> -->
+                        </div>
+                        <div class="timeline-body">
+                            <p class="text-muted">Green Again is committed to a sustainable approach to ecological restoration that develops ongoing support and involvement among local residents. Our goal is to include the Malagasy people in the restoration work in a way that allows them to improve their standard of living while restoring barren land back into primary forest reserves.</p>
+                        </div>
+                    </div>
+                </li>
+                <!-- <li class="timeline-inverted">
+                    <div class="timeline-image">
+                        <img class="img-circle img-responsive" src="img/about/4.jpg" alt="">
+                    </div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4>July 2014</h4>
+                            <h4 class="subheading">Phase Two Expansion</h4>
+                        </div>
+                        <div class="timeline-body">
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                        </div>
+                    </div>
+                </li> -->
+                <!-- <li class="timeline-inverted">
+                    <div class="timeline-image">
+                        <h4>Be Part
+                            <br>Of Our
+                            <br>Story!</h4>
+                    </div>
+                </li> -->
+            </ul>
+        </div>
     </div>
 </div>
-{% endblock %}
+<!-- <div class="container-fluid page-header">
+    <h1>About Us</h1>
+</div>
+<div class="container">
+    <div class="row">
+    <p class="lead">
+        In November 2013, a man's charcoal fire burned out of control, starting a massive forest fire on the Eastern coast of Madagascar. The fire ravaged the man's land as well as over 20 acres of nearby rain forest of Parc Ivoloina, one of the most widely visited forest reserves in Africa.
+    </p>
+    <p>
+        Green Again formed in response to this tragedy.
+    </p>
+    <p>
+        With support from park management and academic advisers at the University of Tamatave, Green Again is working to restore the burned areas in Parc Ivoloina by 2019.
+        Green Again is committed to a sustainable approach to ecological restoration that develops ongoing support and involvement
+    </p>
+    </div>
+</div> -->
 
+<!-- <div class='section-container last-sec'>
+    <div class='section-title title-size'>How You Can Get Involved</div>
+    <div class='pad-below-3em'>
+        <p class='section-title subtitle-size'>Spread the word</p>
+        <a href='https://www.facebook.com/GreenAgainMadagascar' target="_blank"><div class='circle-button triptych'>
+            <img src='/icon_src/fb_logo.png'/>
+        </div></a>
+        <div class='circle-button triptych'>
+            <img src='/icon_src/twitter_logo.png'/>
+        </div>
+        <div class='circle-button triptych'>
+            <img src='/icon_src/instg_logo.png'/>
+        </div>
+    </div>
+    <div>
+        <p class='section-title subtitle-size'>Get in touch: we'd love to hear from you</p>
+        <a href='http://eepurl.com/bR6YoL' target="_blank"><div class='button' id='button-join-us'>JOIN US</div></a>
+    </div>
+</div> -->
+{% endblock %}

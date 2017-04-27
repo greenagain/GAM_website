@@ -9,7 +9,8 @@ html {
 }
 
 body {
-  padding-top: 60px;
+  /*padding-top: 60px;
+  font-family: 'Open Sans', sans-serif;*/
 }
 
 section {
@@ -53,15 +54,15 @@ footer {
   margin-top: 45px;
   padding-top: 5px;
   border-top: 1px solid #eaeaea;
-  color: #999999;
+  color: ##26361B;
 }
 
 footer a {
-  color: #999999;
+  /*color: #999999;*/
 }
 
 footer p {
-  float: right;
+  /*float: right;*/
   margin-right: 25px;
 }
 

@@ -2,6 +2,7 @@
 """Public section, including homepage and signup."""
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import login_required, login_user, logout_user
+import braintree
 
 from GAM_website.extensions import login_manager
 from GAM_website.public.forms import LoginForm
@@ -9,8 +10,12 @@ from GAM_website.user.forms import RegisterForm
 from GAM_website.user.models import User
 from GAM_website.utils import flash_errors
 
+
 blueprint = Blueprint('public', __name__, static_folder='../static')
 
+@blueprint.route('/donate', methods=['GET'])
+def index():
+    return redirect(url_for('payments.donate'))
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -22,6 +27,7 @@ def load_user(user_id):
 def home():
     """Home page."""
     form = LoginForm(request.form)
+    client_token = braintree.ClientToken.generate()
     # Handle logging in
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -31,7 +37,7 @@ def home():
             return redirect(redirect_url)
         else:
             flash_errors(form)
-    return render_template('public/home.html', form=form)
+    return render_template('public/home.html', form=form, client_token=client_token)
 
 
 @blueprint.route('/logout/')
@@ -61,3 +67,9 @@ def about():
     """About page."""
     form = LoginForm(request.form)
     return render_template('public/about.html', form=form)
+
+# @blueprint.route('/donate/')
+# def about():
+#     """Donations"""
+#     form = LoginForm(request.form)
+#     return render_template('public/about.html', form=form)
