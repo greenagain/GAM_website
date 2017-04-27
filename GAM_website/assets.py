@@ -3,13 +3,13 @@
 from flask_assets import Bundle, Environment
 
 #add additional css files here if you have them seperate(like navbar, etc)
-# less = Bundle(
-#     'less/agency.less',
-#     'less/mixins.less',
-#     'less/variables.less',
-#     filters='less',
-#     output='agency.css'
-# )
+less = Bundle(
+    'less/agency.less',
+    'less/mixins.less',
+    'less/variables.less',
+    filters='less',
+    output='agency.css'
+)
 
 css = Bundle(
     'libs/bootstrap/dist/css/bootstrap.css',
@@ -18,8 +18,8 @@ css = Bundle(
     'css/footer.css',
     'css/public.css',
     'css/home.css',
-    'css/agency.css',
-    # less,
+    # 'css/agency.css',
+    less,
     filters='cssmin',
     output='public/css/common.css'
 )
