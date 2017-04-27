@@ -1,4 +1,4 @@
-$(document).ready(function() {
+(function ($) { $(document).ready(function() {
     // $('.counter').counterUp({
     //     delay: 10,
     //     time: 1000
@@ -33,4 +33,5 @@ $(document).ready(function() {
             })
         }
     )
-})
+});
+})(jQuery);
