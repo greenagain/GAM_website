@@ -3,6 +3,7 @@
   "title": "Green Again Madagascar",
   "version": "0.1.1",
   "author": "Eric Sherman",
+  "license": "UNLICENSED",
   "devDependencies": {
     "bootstrap": "^3.3.7",
     "browser-sync": "^2.13.0",
