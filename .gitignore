@@ -6,7 +6,6 @@
 # Packages
 *.egg
 *.egg-info
-build
 eggs
 parts
 bin
@@ -59,13 +58,12 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
-build/
 develop-eggs/
 dist/
 downloads/
 eggs/
 .eggs/
-lib/
+#lib/
 lib64/
 parts/
 
@@ -112,3 +110,7 @@ docs/_build/
 target/
 
 GAM_website/static/node_modules
+GAM_website/Scripts/activate
+*.bat
+GAM_website/Scripts/deactivate
+GAM_website/Scripts/conda
