@@ -2,7 +2,7 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<header>
+<header style="background-image: url({{ url_for('static', filename='img/home_cover.jpg') }})">
     <div class="container">
         <div class="intro-text">
             <div class="intro-heading">Green Again: Madagascar</div>
@@ -329,7 +329,7 @@
 </aside> -->
 
 <!-- Contact Section -->
-<section id="contact">
+<section id="contact" style="background-image: url({{ url_for('static', filename='img/img_src/archive/static6 copy.jpg') }})">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -383,8 +383,5 @@
     {% include "./payments/checkouts/donate_form.html" %}
 </div>
 </section>
-<!-- <script src="./static/js/scripts/countUp.min.js"></script> -->
-
-
 
 {% endblock %}

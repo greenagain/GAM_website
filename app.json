@@ -1,0 +1,44 @@
+{
+  "name": "GAM_website",
+  "scripts": {
+  },
+  "env": {
+    "APP_SECRET_KEY": {
+      "required": true
+    },
+    "BT_ENVIRONMENT": {
+      "required": true
+    },
+    "BT_MERCHANT_ID": {
+      "required": true
+    },
+    "BT_PRIVATE_KEY": {
+      "required": true
+    },
+    "BT_PUBLIC_KEY": {
+      "required": true
+    },
+    "FLASK_APP": {
+      "required": true
+    },
+    "FLASK_DEBUG": {
+      "required": true
+    },
+    "GAM_WEBSITE_SECRET": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    },
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
