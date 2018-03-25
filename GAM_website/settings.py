@@ -8,7 +8,7 @@ class Config(object):
     """Base configuration."""
 
     dotenv_path = join(dirname(__file__), '../.env')
-    load_dotenv(dotenv_path)
+#     load_dotenv(dotenv_path)
     SECRET_KEY = os.environ.get('GAM_WEBSITE_SECRET')  # TODO: Change me
     APP_DIR = os.path.abspath(os.path.dirname(__file__))  # This directory
     PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir))
