@@ -89,17 +89,20 @@ def create_checkout():
         result = braintree.Subscription.create({
             #'payment_method_nonce': request.form['payment_method_nonce'],
             "payment_method_token": payment_token,
-            "plan_id": "montly",
+            "plan_id": "monthly-generic",
             "price": request.form['amount'],
             "options": {
                 "start_immediately": True
                 }
         })
 
-    try:
-        return redirect(url_for('payments.show_checkout',transaction_id=result.transaction.id))
-    except AttributeError:
-        return redirect(url_for('payments.show_checkout',transaction_id=result.subscription.transactions[0].id))
-    else:
-        for x in result.errors.deep_errors: flash('Error: %s: %s' % (x.code, x.message))
-        return redirect(url_for('payments.new_checkout'))
+
+    return redirect(url_for('public.home'))
+
+    # try:
+    #     return redirect(url_for('payments.show_checkout',transaction_id=result.transaction.id, form=form, client_token=client_token))
+    # except AttributeError:
+    #     return redirect(url_for('payments.show_checkout',transaction_id=result.subscription.transactions[0].id, form=form, client_token=client_token))
+    # else:
+    #     for x in result.errors.deep_errors: flash('Error: %s: %s' % (x.code, x.message, form=form, client_token=client_token))
+    #     return redirect(url_for('payments.new_checkout'))
