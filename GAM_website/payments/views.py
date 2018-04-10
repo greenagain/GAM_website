@@ -87,7 +87,7 @@ def create_checkout():
             payment_token = customer_result.customer.payment_methods[0].token
 
         result = braintree.Subscription.create({
-            #'payment_method_nonce': request.form['payment_method_nonce'],
+            'payment_method_nonce': request.form['payment_method_nonce'],
             "payment_method_token": payment_token,
             "plan_id": "monthly-generic",
             "price": request.form['amount'],
@@ -99,10 +99,7 @@ def create_checkout():
 
     # return redirect(url_for('public.home'))
     if result.is_success or result.transaction:
-        # return render_template('public/home.html)
         return redirect(url_for('payments.show_checkout',transaction_id=result.transaction.id))
-        # return jsonify(result)
-        # return '', 202
     else:
         for error in result.errors.deep_errors:
             print("ERROR")
@@ -111,4 +108,4 @@ def create_checkout():
 
         for x in result.errors.deep_errors:
             flash('Error: %s: %s' % (x.code, x.message))
-        return redirect(url_for('public.home'))
+        return redirect(url_for('payments.new_checkout'))

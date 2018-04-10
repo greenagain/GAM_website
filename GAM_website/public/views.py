@@ -30,6 +30,7 @@ def home():
     client_token = braintree.ClientToken.generate()
     # Handle logging in
     if request.method == 'POST':
+        # return redirect(url_for('payments.create_checkout'))
         # flash('You are logged in.', 'success')
         if form.validate_on_submit():
             pass
