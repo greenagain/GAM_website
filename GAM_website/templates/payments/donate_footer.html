@@ -11,12 +11,36 @@
   var client_token = '{{ client_token }}';
   braintree.setup(client_token, "dropin", {
     container: "bt-dropin",
+    onError: onError,
+    onPaymentMethodReceived: function (obj) {
+  // Do some logic in here.
+  // When you're ready to submit the form:
+  form = document.forms[1];
+  form.submit();
+},
     paypal: {
         button: {
           type: 'checkout'
       }
     }
   });
+
+  function onError(err) {
+   var errorType = err.type;//access the error type via err.type
+   var errorMessage = err.message; //access the error message via err
+   //do something helpful for the user via the combination of these two parameters
+   BootstrapDialog.alert({
+     title: 'Error',
+     message: 'Something went wrong with your payment information!<br>' + errorMessage,
+     type: BootstrapDialog.TYPE_DANGER, // <-- Default value is BootstrapDialog.TYPE_PRIMARY
+     closable: true, // <-- Default value is false
+     buttonLabel: 'Close', // <-- Default value is 'OK',
+     callback: function(result) {
+         // result will be true if button was click, while it will be false if users close the dialog directly.
+         // alert('Result is: ' + result);
+     }
+ });
+  }
 
 
 

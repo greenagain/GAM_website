@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask import Blueprint, flash, redirect, render_template, request, url_for, jsonify
 import braintree
 
 import os
@@ -30,12 +30,12 @@ TRANSACTION_SUCCESS_STATUSES = [
 @blueprint.route('/payments/', methods=['GET'])
 def donate():
     client_token = braintree.ClientToken.generate()
-    return render_template('payments/donate.html', client_token=client_token)
+    return render_template('payments/checkouts/donate_form.html', client_token=client_token)
 
 @blueprint.route('/payments/checkouts/new', methods=['GET'])
 def new_checkout():
     client_token = braintree.ClientToken.generate()
-    return render_template('payments/donate.html', client_token=client_token)
+    return render_template('payments/checkouts/donate_form.html', client_token=client_token)
 
 @blueprint.route('/payments/checkouts/<transaction_id>', methods=['GET'])
 def show_checkout(transaction_id):
@@ -97,12 +97,18 @@ def create_checkout():
         })
 
 
-    return redirect(url_for('public.home'))
+    # return redirect(url_for('public.home'))
+    if result.is_success or result.transaction:
+        # return render_template('public/home.html)
+        return redirect(url_for('payments.show_checkout',transaction_id=result.transaction.id))
+        # return jsonify(result)
+        # return '', 202
+    else:
+        for error in result.errors.deep_errors:
+            print("ERROR")
+            print(error.code)
+            print(error.message)
 
-    # try:
-    #     return redirect(url_for('payments.show_checkout',transaction_id=result.transaction.id, form=form, client_token=client_token))
-    # except AttributeError:
-    #     return redirect(url_for('payments.show_checkout',transaction_id=result.subscription.transactions[0].id, form=form, client_token=client_token))
-    # else:
-    #     for x in result.errors.deep_errors: flash('Error: %s: %s' % (x.code, x.message, form=form, client_token=client_token))
-    #     return redirect(url_for('payments.new_checkout'))
+        for x in result.errors.deep_errors:
+            flash('Error: %s: %s' % (x.code, x.message))
+        return redirect(url_for('public.home'))
