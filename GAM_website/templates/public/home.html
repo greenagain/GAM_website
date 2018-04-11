@@ -284,4 +284,32 @@ Membership with Green Again provides you with a section of rainforest to adopt a
 </div>
 </section>
 
+<script>
+$(document).ready(function() {
+    var messages = "{{ get_flashed_messages() }}";
+
+    if (typeof messages != 'undefined' && messages != '[]') {
+      BootstrapDialog.show({
+          title: 'Confirmation',
+          type: BootstrapDialog.TYPE_SUCCESS,
+          message: 'Your information has been received. Thank you for your membership!',
+          buttons: [{
+              id: 'btn-ok',
+              icon: 'glyphicon glyphicon-check',
+              label: 'OK',
+              cssClass: 'btn-primary',
+              data: {
+                  js: 'btn-confirm',
+                  'user-id': '3'
+              },
+              autospin: false,
+              action: function(dialogRef){
+                  dialogRef.close();
+              }
+          }]
+      });
+    };
+});
+</script>
+
 {% endblock %}

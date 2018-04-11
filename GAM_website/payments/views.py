@@ -99,7 +99,9 @@ def create_checkout():
 
     # return redirect(url_for('public.home'))
     if result.is_success or result.transaction:
-        return redirect(url_for('payments.show_checkout',transaction_id=result.transaction.id))
+        flash("success")
+        return redirect(url_for('public.home'))
+        # return redirect(url_for('payments.show_checkout',transaction_id=result.transaction.id))
     else:
         for error in result.errors.deep_errors:
             print("ERROR")
