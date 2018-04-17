@@ -58,6 +58,7 @@ def show_checkout(transaction_id):
 
 @blueprint.route('/payments/checkouts', methods=['POST'])
 def create_checkout():
+    # single non subscription payment (should this be possible?)
     if 'recurring' not in request.form:
         print('no subscription, transaction')
         result = braintree.Transaction.sale({
@@ -73,6 +74,7 @@ def create_checkout():
                 "store_in_vault_on_success": True,
             }
         })
+    # recurring payments
     if 'recurring' in request.form:
         print('recurring!')
         customer_result = braintree.Customer.create({
@@ -89,6 +91,7 @@ def create_checkout():
         result = braintree.Subscription.create({
             'payment_method_nonce': request.form['payment_method_nonce'],
             "payment_method_token": payment_token,
+            # type
             "plan_id": "monthly-generic",
             "price": request.form['amount'],
             "options": {
