@@ -87,10 +87,10 @@ def create_checkout():
         payment_token = customer_result.customer.payment_methods[0].token
     # import pdb; pdb.set_trace()
         result = braintree.Subscription.create({
-            'payment_method_nonce': request.form['payment_method_nonce'],
+            # 'payment_method_nonce': request.form['payment_method_nonce'],
             "payment_method_token": payment_token,
             # type
-            "plan_id": 'monthly-generic',
+            "plan_id": str(request.form['options'] + request.form['tier']),
             # "price": request.form['amount'],
             "options": {
                 "start_immediately": True
@@ -109,7 +109,7 @@ def create_checkout():
             print("ERROR")
             print(error.code)
             print(error.message)
-            import pdb; pdb.set_trace()
+
 
         for x in result.errors.deep_errors:
             flash('Error: %s: %s' % (x.code, x.message))
