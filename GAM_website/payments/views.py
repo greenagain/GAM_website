@@ -58,46 +58,45 @@ def show_checkout(transaction_id):
 
 @blueprint.route('/payments/checkouts', methods=['POST'])
 def create_checkout():
+    print(request.form)
     # single non subscription payment (should this be possible?)
-    if 'recurring' not in request.form:
-        print('no subscription, transaction')
-        result = braintree.Transaction.sale({
-            'amount': request.form['amount'],
-            'payment_method_nonce': request.form['payment_method_nonce'],
-            'customer': {
-            'first_name': request.form['first_name'],
-            'last_name': request.form['last_name'],
-            'email': request.form['email']
-            },
-            'options': {
-                "submit_for_settlement": True,
-                "store_in_vault_on_success": True,
-            }
-        })
+    # if 'recurring' not in request.form:
+    #     result = braintree.Transaction.sale({
+    #         'amount': request.form['amount'],
+    #         'payment_method_nonce': request.form['payment_method_nonce'],
+    #         'customer': {
+    #         'first_name': request.form['first_name'],
+    #         'last_name': request.form['last_name'],
+    #         'email': request.form['email']
+    #         },
+    #         'options': {
+    #             "submit_for_settlement": True,
+    #             "store_in_vault_on_success": True,
+    #         }
+    #     })
     # recurring payments
-    if 'recurring' in request.form:
-        print('recurring!')
-        customer_result = braintree.Customer.create({
-            'first_name': request.form['first_name'],
-            'last_name': request.form['last_name'],
-            'email': request.form['email'],
-            "payment_method_nonce": request.form['payment_method_nonce']
-        })
+    customer_result = braintree.Customer.create({
+        'first_name': request.form['first_name'],
+        'last_name': request.form['last_name'],
+        'email': request.form['email'],
+        "payment_method_nonce": request.form['payment_method_nonce']
+    })
 
-        if customer_result.is_success:
-            customer_id = customer_result.customer.id
-            payment_token = customer_result.customer.payment_methods[0].token
-
+    if customer_result.is_success:
+        customer_id = customer_result.customer.id
+        payment_token = customer_result.customer.payment_methods[0].token
+    # import pdb; pdb.set_trace()
         result = braintree.Subscription.create({
-            'payment_method_nonce': request.form['payment_method_nonce'],
+            'payment_method_nonce': 'fake-valid-nonce',
             "payment_method_token": payment_token,
             # type
-            "plan_id": "monthly-generic",
-            "price": request.form['amount'],
+            "plan_id": str(request.form['options'] + request.form['tier']),
+            # "price": request.form['amount'],
             "options": {
                 "start_immediately": True
                 }
         })
+
 
 
     # return redirect(url_for('public.home'))

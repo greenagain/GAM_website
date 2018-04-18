@@ -22,25 +22,25 @@
 
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
           <label class="btn active">
-            <input type="radio" name="options" id="monthly" autocomplete="off" onchange="updateAmount();" checked> Monthly
+            <input type="radio" name="options" value="monthly" id="monthly" autocomplete="off" onchange="calcValues();" checked> Monthly
           </label>
           <label class="btn">
-            <input type="radio" name="options" id="annual" autocomplete="off" onchange="updateAmount();"> Annual
+            <input type="radio" name="options" value="annual" id="annual" autocomplete="off" onchange="calcValues();"> Annual
           </label>
         </div>
 
         <div class="btn-group btn-group-justified btn-lg" data-toggle="buttons">
         <label class="btn btn-primary active">
-          <input type="radio" name="tier" id="t1" autocomplete="off" onchange="updateTier();" value="25" checked> Bronze
+          <input type="radio" name="tier" id="t1" autocomplete="off" onchange="calcValues();" value="-01" checked> Bronze
         </label>
         <label class="btn btn-primary ">
-          <input type="radio" name="tier" id="t2" autocomplete="off" onchange="updateTier();" value="100"> Silver
+          <input type="radio" name="tier" id="t2" autocomplete="off" onchange="calcValues();" value="-02"> Silver
         </label>
         <label class="btn btn-primary ">
-          <input type="radio" name="tier" id="t3" autocomplete="off" onchange="updateTier();" value="250"> Gold
+          <input type="radio" name="tier" id="t3" autocomplete="off" onchange="calcValues();" value="-03"> Gold
         </label>
         <label class="btn btn-primary ">
-          <input type="radio" name="tier" id="t4" autocomplete="off" onchange="updateTier();" value="500"> Platinum
+          <input type="radio" name="tier" id="t4" autocomplete="off" onchange="calcValues();" value="-04"> Platinum
         </label>
       </div>
 
@@ -90,7 +90,6 @@
         <input type="hidden" id="nonce" name="payment_method_nonce" />
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
       </form>
-
 
 
       <div class="container">
@@ -223,32 +222,87 @@ var nonceInput = document.querySelector('#nonce');
 // });
 
 const tierInput = document.getElementsByName("tier");
+const tierValues = {
+  't1': 25,
+  't2': 100,
+  't3': 250,
+  't4': 500
+}
 
 
-function updateTier() {
+function calcValues() {
+  tierAmount = calcTier();
+
+    if (document.getElementById("annual").checked) {
+      console.log("annual");
+        amount.value = tierAmount * 12;
+    } else if (document.getElementById("monthly").checked) {
+      console.log("monthly");
+      amount.value = tierAmount;
+    };
+
+
+}
+
+function calcTier() {
   for (var tier in tierInput) {
       if (tierInput[tier].checked) {
         selectedTier = tierInput[tier]
-        console.log(selectedTier)
-        amount.value = selectedTier.value;
+        if (selectedTier.id in tierValues) {
+           tierAmount = tierValues[selectedTier.id];
+        }
+        else {
+          tierAmount= 25;
+        }
       }
+  }
+  return tierAmount;
+}
+
+function calcAnnual() {
+  function updateAmount() {
+    if (document.getElementById("annual").checked) {
+      console.log("annual");
+        amount.value = amount.value * 12;
+    } else if (document.getElementById("monthly").checked) {
+      console.log("monthly");
+      amount.value = amount.value/12;
+    };
+
   }
 }
 
-function updateAmount() {
-  if (document.getElementById("annual").checked) {
-    console.log("annual");
-      amount.value = amount.value * 12;
-  } else {
-    console.log("monthly");
-    amount.value = amount.value/12;
-  };
 
-}
+  // function updateTier() {
+  //   for (var tier in tierInput) {
+  //       if (tierInput[tier].checked) {
+  //         selectedTier = tierInput[tier]
+  //         if (selectedTier.id in tierValues) {
+  //            amount.value = tierValues[selectedTier.id];
+  //         }
+  //         else {
+  //           amount.value = 25;
+  //         }
+  //       }
+  //   }
+  // }
+  //
+  // function updateAmount() {
+  //   if (document.getElementById("annual").checked) {
+  //     console.log("annual");
+  //       amount.value = amount.value * 12;
+  //   } else if (document.getElementById("monthly").checked) {
+  //     console.log("monthly");
+  //     amount.value = amount.value/12;
+  //   };
+  //
+  // }
+
+
 
 
 document.addEventListener('DOMContentLoaded', function(){
-  updateTier();
+calcValues();
 
 });
 
