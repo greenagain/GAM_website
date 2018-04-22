@@ -1,121 +1,22 @@
 
 {% block js %}
 
-<!-- <script src="https://js.braintreegateway.com/js/braintree-2.27.0.min.js"></script> -->
-
+<script src="https://js.braintreegateway.com/js/braintree-2.27.0.min.js"></script>
 <script src="{{ url_for('static', filename='payments/javascript/demo.js') }}"></script>
 <script>
-  // var checkout = new Demo({
-  //   formID: 'payment-form'
-  // })
-
-//   var button = document.querySelector('#submit-button');
-//
-//   braintree.dropin.create({
-//     authorization: '{{client_token}}',
-//     container: '#dropin-container'
-//   }, function (err, dropinInstance) {
-//     button.addEventListener('click', function () {
-//       instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
-//         if (requestPaymentMethodErr) {
-//   // No payment method is available.
-//   // An appropriate error will be shown in the UI.
-//   onError(requestPaymentMethodErr);
-//   return;
-// }
-// if (event.paymentMethodIsSelected) {
-//   console.log('saves!')
-// }
-//         // Submit payload.nonce to your server
-//       });
-//     });
-//   });
-
-var submitButton = document.querySelector('#submit-button');
-
-  braintree.dropin.create({
-    authorization: '{{client_token}}',
-    container: '#dropin-container'
-  }, function (err, dropinInstance) {
-    function sendNonceToServer() {
-      dropinInstance.requestPaymentMethod(function (err, payload) {
-        if (err) {
-          onError(err);
-        }
-
-        // send payload.nonce to your server
-      });
-    }
-
-    // allows us to still request the payment method manually, such as
-    // when filling out a credit card form
-    submitButton.addEventListener('click', sendNonceToServer);
-
-    dropinInstance.on('paymentMethodRequestable', function (event) {
-      // if the nonce is already available (via PayPal authentication
-      // or by using a stored payment method), we can request the
-      // nonce right away. Otherwise, we wait for the customer to
-      // request the nonce by pressing the submit button once they
-      // are finished entering their credit card details
-      if (event.paymentMethodIsSelected) {
-        onSuccess();
-        sendNonceToServer();
-      }
-    });
+  var checkout = new Demo({
+    formID: 'payment-form'
   })
 
-
-
-//   var client_token = '{{ client_token }}';
-//   braintree.setup(client_token, "dropin", {
-//     container: "bt-dropin",
-//     onError: onError,
-//     onPaymentMethodReceived: function (obj) {
-//   // Do some logic in here.
-//   // When you're ready to submit the form:
-//   form = document.forms[1];
-//   form.submit();
-// },
-//     paypal: {
-//         button: {
-//           type: 'checkout'
-//       }
-//     }
-//   });
-
-  function onError(err) {
-   var errorType = err.type;//access the error type via err.type
-   var errorMessage = err.message; //access the error message via err
-   //do something helpful for the user via the combination of these two parameters
-   BootstrapDialog.alert({
-     title: 'Error',
-     message: 'Something went wrong with your payment information!<br>' + errorMessage,
-     type: BootstrapDialog.TYPE_DANGER, // <-- Default value is BootstrapDialog.TYPE_PRIMARY
-     closable: true, // <-- Default value is false
-     buttonLabel: 'Close', // <-- Default value is 'OK',
-     callback: function(result) {
-         // result will be true if button was click, while it will be false if users close the dialog directly.
-         // alert('Result is: ' + result);
-     }
- });
-  }
-
-  function onSuccess() {
-   // var errorType = err.type;//access the error type via err.type
-   // var errorMessage = err.message; //access the error message via err
-   //do something helpful for the user via the combination of these two parameters
-   BootstrapDialog.alert({
-     title: 'Error',
-     message: 'Something went wrong with your payment information!<br>' + errorMessage,
-     type: BootstrapDialog.TYPE_SUCCESS, // <-- Default value is BootstrapDialog.TYPE_PRIMARY
-     closable: true, // <-- Default value is false
-     buttonLabel: 'Close', // <-- Default value is 'OK',
-     callback: function(result) {
-         // result will be true if button was click, while it will be false if users close the dialog directly.
-         // alert('Result is: ' + result);
-     }
- });
-  }
+  var client_token = '{{ client_token }}';
+  braintree.setup(client_token, "dropin", {
+    container: "bt-dropin",
+    paypal: {
+        button: {
+          type: 'checkout'
+      }
+    }
+  });
 
 
 

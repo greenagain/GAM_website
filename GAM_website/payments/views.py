@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, redirect, render_template, request, url_for, jsonify
+from flask import Blueprint, flash, redirect, render_template, request, url_for
 import braintree
 
 import os
@@ -30,12 +30,12 @@ TRANSACTION_SUCCESS_STATUSES = [
 @blueprint.route('/payments/', methods=['GET'])
 def donate():
     client_token = braintree.ClientToken.generate()
-    return render_template('payments/checkouts/donate_form.html', client_token=client_token)
+    return render_template('payments/donate.html', client_token=client_token)
 
 @blueprint.route('/payments/checkouts/new', methods=['GET'])
 def new_checkout():
     client_token = braintree.ClientToken.generate()
-    return render_template('payments/checkouts/donate_form.html', client_token=client_token)
+    return render_template('payments/donate.html', client_token=client_token)
 
 @blueprint.route('/payments/checkouts/<transaction_id>', methods=['GET'])
 def show_checkout(transaction_id):
@@ -58,74 +58,51 @@ def show_checkout(transaction_id):
 
 @blueprint.route('/payments/checkouts', methods=['POST'])
 def create_checkout():
-    print(request.form)
-    # single non subscription payment (should this be possible?)
-    # if 'recurring' not in request.form:
-    #     result = braintree.Transaction.sale({
-    #         'amount': request.form['amount'],
-    #         'payment_method_nonce': request.form['payment_method_nonce'],
-    #         'customer': {
-    #         'first_name': request.form['first_name'],
-    #         'last_name': request.form['last_name'],
-    #         'email': request.form['email']
-    #         },
-    #         'options': {
-    #             "submit_for_settlement": True,
-    #             "store_in_vault_on_success": True,
-    #         }
-    #     })
+    if 'recurring' not in request.form:
+        print('no subscription, transaction')
+        result = braintree.Transaction.sale({
+            'amount': request.form['amount'],
+            'payment_method_nonce': request.form['payment_method_nonce'],
+            'customer': {
+            'first_name': request.form['first_name'],
+            'last_name': request.form['last_name'],
+            'email': request.form['email']
+            },
+            'options': {
+                "submit_for_settlement": True,
+                "store_in_vault_on_success": True,
+            }
+        })
+    if 'recurring' in request.form:
+        print('recurring!')
+        customer_result = braintree.Customer.create({
+            'first_name': request.form['first_name'],
+            'last_name': request.form['last_name'],
+            'email': request.form['email'],
+            "payment_method_nonce": request.form['payment_method_nonce']
+        })
 
-    # recurring payments
-    customer_result = braintree.Customer.create({
-        'first_name': request.form['first_name'],
-        'last_name': request.form['last_name'],
-        'email': request.form['email'],
-        "payment_method_nonce": "fake-valid-no-billing-address-nonce"
-    })
-
-    if customer_result.is_success:
-        customer_id = customer_result.customer.id
-        try:
+        if customer_result.is_success:
+            customer_id = customer_result.customer.id
             payment_token = customer_result.customer.payment_methods[0].token
-            result = braintree.Subscription.create({
-                # 'payment_method_nonce': request.form['payment_method_nonce'],
-                "payment_method_token": payment_token,
-                # type
-                "plan_id": str(request.form['options'] + request.form['tier']),
-                # "price": request.form['amount'],
-                "options": {
-                    "start_immediately": True
-                    }
-            })
-        except Exception as e:
-            print("exception,", e)
-            result = braintree.Subscription.create({
-                # 'payment_method_nonce': request.form['payment_method_nonce'],
-                'payment_method_nonce': "fake-valid-no-billing-address-nonce",
-                # "payment_method_token": payment_token,
-                # type
-                "plan_id": str(request.form['options'] + request.form['tier']),
-                # "price": request.form['amount'],
-                "options": {
-                    "start_immediately": True
-                    }
-            })
 
-    # return redirect(url_for('public.home'))
-    if result:
-        # import pdb; pdb.set_trace()
-        if (result.is_success == True or result.transaction):
-            flash("success")
-            return redirect(url_for('public.home'))
-            # return redirect(url_for('payments.show_checkout',transaction_id=result.transaction.id))
-        else:
-            for error in result.errors.deep_errors:
-                print("ERROR")
-                print(error.code)
-                print(error.message)
-                flash('Error: %s: %s' % (error.code, error.message))
-            return redirect(url_for('public.home'))
-    else:
-        for x in result.errors.deep_errors:
-            flash('Error: %s: %s' % (x.code, x.message))
-        return redirect(url_for('public.home'))
+        result = braintree.Subscription.create({
+            #'payment_method_nonce': request.form['payment_method_nonce'],
+            "payment_method_token": payment_token,
+            "plan_id": "monthly-generic",
+            "price": request.form['amount'],
+            "options": {
+                "start_immediately": True
+                }
+        })
+
+
+    return redirect(url_for('public.home'))
+
+    # try:
+    #     return redirect(url_for('payments.show_checkout',transaction_id=result.transaction.id, form=form, client_token=client_token))
+    # except AttributeError:
+    #     return redirect(url_for('payments.show_checkout',transaction_id=result.subscription.transactions[0].id, form=form, client_token=client_token))
+    # else:
+    #     for x in result.errors.deep_errors: flash('Error: %s: %s' % (x.code, x.message, form=form, client_token=client_token))
+    #     return redirect(url_for('payments.new_checkout'))

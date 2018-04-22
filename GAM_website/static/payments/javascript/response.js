@@ -14,9 +14,9 @@ $(function(){
   Response.prototype.events = function(){
     var self = this;
 
-    this.backButtons.on('click', function(event){
-      self.backHandler(event);
-    });
+    // this.backButtons.on('click', function(event){
+    //   self.backHandler(event);
+    // });
   };
 
   Response.prototype.backHandler = function(event){

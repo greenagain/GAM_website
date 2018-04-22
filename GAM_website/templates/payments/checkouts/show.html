@@ -1,4 +1,4 @@
-{% extends "public/home.html" %}
+{% extends "home.html" %}
 {% block content %}
 
 <div class="wrapper">
@@ -13,6 +13,11 @@
         <p>{{ result['message'] }}</p>
       </section>
 
+      <section>
+        <a class="button primary back" href="/payments/checkouts/new">
+          <span>Test Another Transaction</span>
+        </a>
+      </section>
     </div>
   </div>
 </div>
