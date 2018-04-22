@@ -80,10 +80,11 @@ def create_checkout():
         'first_name': request.form['first_name'],
         'last_name': request.form['last_name'],
         'email': request.form['email'],
-        "payment_method_nonce": "fake-valid-no-billing-address-nonce"
+        "payment_method_nonce": request.form['payment_method_nonce']
     })
 
     if customer_result.is_success:
+    # no nonce should be needed to create subscription, just the payment token
         customer_id = customer_result.customer.id
         try:
             payment_token = customer_result.customer.payment_methods[0].token
@@ -99,17 +100,18 @@ def create_checkout():
             })
         except Exception as e:
             print("exception,", e)
-            result = braintree.Subscription.create({
-                # 'payment_method_nonce': request.form['payment_method_nonce'],
-                'payment_method_nonce': "fake-valid-no-billing-address-nonce",
-                # "payment_method_token": payment_token,
-                # type
-                "plan_id": str(request.form['options'] + request.form['tier']),
-                # "price": request.form['amount'],
-                "options": {
-                    "start_immediately": True
-                    }
-            })
+            pass
+            # result = braintree.Subscription.create({
+            #     # 'payment_method_nonce': request.form['payment_method_nonce'],
+            #     'payment_method_nonce': "fake-valid-no-billing-address-nonce",
+            #     # "payment_method_token": payment_token,
+            #     # type
+            #     "plan_id": str(request.form['options'] + request.form['tier']),
+            #     # "price": request.form['amount'],
+            #     "options": {
+            #         "start_immediately": True
+            #         }
+            # })
 
     # return redirect(url_for('public.home'))
     if result:
