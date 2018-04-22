@@ -1,85 +1,313 @@
 {% block content %}
 
-<div class="wrapper">
+  <div class="wrapper">
+    <div class="checkout container">
+      <form id="payment-form" method="post" action="/payments/checkouts" name="payment-form" >
+        <div class="form-group">
+          <label for="first-name">First Name</label> <input id="first-name" name=
+          "first_name" type="text" class="form-control" />
+        </div>
 
-  <div class="checkout container">
-        <form id="payment-form" method="post" action="/payments/checkouts">
-    <div class="form-group">
-        <label for="first-name">
-            First Name
+        <div class="form-group">
+          <label for="last-name">Last Name</label> <input id="last-name" name="last_name"
+          type="text" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label> <input id="email" name="email" type=
+          "email" placeholder="ilovetrees@gmail.com" class="form-control"  maxLength="128" required/>
+        </div>
+
+        <h5 class="section-subheading text-muted">Payment Options</h5>
+
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn active">
+            <input type="radio" name="options" value="monthly" id="monthly" autocomplete="off" onchange="calcValues();" checked> Monthly
+          </label>
+          <label class="btn">
+            <input type="radio" name="options" value="annual" id="annual" autocomplete="off" onchange="calcValues();"> Annual
+          </label>
+        </div>
+
+        <div class="btn-group btn-group-justified btn-lg" data-toggle="buttons">
+        <label class="btn btn-primary active">
+          <input type="radio" name="tier" id="t1" autocomplete="off" onchange="calcValues();" value="-01" checked> Bronze
         </label>
-            <input id="first-name" name="first_name" type="text" class="form-control">
-</div>
-  <div class="form-group">
-        <label for="last-name">
-            Last Name
-                </label>
-            <input id="last-name" name="last_name" type="text" class="form-control">
-          </div>
-  <div class="form-group">
-        <label for="email">
-            Email Address
+        <label class="btn btn-primary ">
+          <input type="radio" name="tier" id="t2" autocomplete="off" onchange="calcValues();" value="-02"> Silver
         </label>
-            <input id="email" name="email" type="email" placeholder="ilovetrees@gmail.com" class="form-control">
-</div>
-              <h5 class="section-subheading text-muted">Payment Options </h5>
-            <div class="form-group">
-          <label for="amount">Amount</label>
-              <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="10" class="form-control">
-            </div>
-  <div class="form-group">
-                    <div class="checkbox">
-          <!-- <label for="recurring" style="font-weight:bold">
-            Make this a regular monthly contribution:
-                      </label> -->
-              <!-- <input id="recurring" name="recurring" type="checkbox" value="Make this a regular monthly contribution" class="form-check-input"> -->
-
-                  <label style="font-size: 2em">
-                      <label for="recurring" style="font-size:.55em;font-weight:bold;">
-                        Make this a regular monthly payment.
-                                  </label>
-                      <input id="recurring" name="recurring" type="checkbox" value="Make this a regular monthly contribution" class="form-check-input">
-                      <span class="cr "><i class="cr-icon fa fa-check"></i></span>
-                  </label>
-              </div>
-            </div>
-        <div class="bt-drop-in-wrapper">
-          <div id="bt-dropin"></div>
-        </div>
-
-        <div class="col-lg-12 text-left">
-            <div id="success"></div>
-            <button type="submit" class="btn btn-xl btn-info btn-lg"  data-toggle="modal" data-target="#payment_modal">Submit</button>
-        </div>
-      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-    </form>
-    <div class="container">
-
-
-      <!-- Modal -->
-      <div class="modal fade" id="payment_modal" role="dialog">
-        <div class="modal-dialog">
-
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-              <p>Thank you! We will follow up with a confirmation. </p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-
-        </div>
+        <label class="btn btn-primary ">
+          <input type="radio" name="tier" id="t3" autocomplete="off" onchange="calcValues();" value="-03"> Gold
+        </label>
+        <label class="btn btn-primary ">
+          <input type="radio" name="tier" id="t4" autocomplete="off" onchange="calcValues();" value="-04"> Platinum
+        </label>
       </div>
 
-  </div>
-  </div>
-</div>
 
 
+        <div class="form-group">
+          <label for="amount">Amount</label> <input id="amount" name="amount" type="tel"
+          min="1" placeholder="Amount" value="25" class="form-control" />
+        </div>
+
+
+
+        <!-- <input id="vinput" type="range" name="quantity" min="0" max="100">
+        <output id="voutput" for="quantity"></output> -->
+
+
+
+        <div class="form-group">
+          <div class="checkbox">
+            <!-- <label for="recurring" style="font-weight:bold">
+            Make this a regular monthly contribution:
+                      </label> -->
+            <!-- <input id="recurring" name="recurring" type="checkbox" value="Make this a regular monthly contribution" class="form-check-input">
+             <label style="font-size: 2em"><label for="recurring" style=
+            "font-size:.55em;font-weight:bold;">Make this a regular monthly
+            payment.</label> <input id="recurring" name="recurring" type="checkbox"
+            value="Make this a regular monthly contribution" class="form-check-input" /> -->
+            </label>
+          </div>
+        </div>
+
+        <!-- <div class="bt-drop-in-wrapper">
+          <div id="bt-dropin"></div>
+        </div> -->
+
+        <div id="bt-dropin"></div>
+
+<script>
+
+</script>
+
+        <div class="col-lg-12 text-left">
+          <button id="submit-button" type="submit" class=
+          "btn btn-xl btn-info btn-lg" data-toggle="modal" data-target="_blank" disabled="true" >Submit</button>
+            <!-- <button id="submit-button">Request payment method</button> -->
+        </div>
+        <input type="hidden" id="nonce" name="payment_method_nonce" />
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+      </form>
+
+
+      <div class="container">
+        <!-- Modal -->
+
+        <div class="modal fade" id="payment_modal" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+
+              <div class="alert alert-success alert-dismissible">
+              <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <strong>Success!</strong> Indicates a successful or positive action.
+            </div>
+
+            <div id="payment_error" class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <b>An Error occured</b>
+            </div>
+
+              <div class="modal-body">
+                <p>Thank you! We will follow up with a confirmation.</p>
+              </div>
+
+
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss=
+                "modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="https://js.braintreegateway.com/web/dropin/1.10.0/js/dropin.min.js"></script>
+<script>
+
+var form = document.querySelector('#payment-form');
+var nonceInput = document.querySelector('#nonce');
+
+  var form = document.querySelector('#payment-form');
+  var client_token = '{{ client_token }}';
+  var submitButton = document.querySelector('#submit-button');
+
+  braintree.dropin.create({
+      authorization: '{{client_token}}',
+      container: '#bt-dropin'
+    }, function (err, dropinInstance) {
+  submitButton.addEventListener('click', function () {
+    dropinInstance.requestPaymentMethod(function (err, payload) {
+      nonceInput.value = payload.nonce;
+      if (form.email.checkValidity()){
+        form.submit();
+      }
+
+    });
+  });
+
+  if (dropinInstance.isPaymentMethodRequestable()) {
+    // This will be true if you generated the client token
+    // with a customer ID and there is a saved payment method
+    // available to tokenize with that customer.
+    submitButton.removeAttribute('disabled');
+  }
+
+  dropinInstance.on('paymentMethodRequestable', function (event) {
+    console.log(event.type); // The type of Payment Method, e.g 'CreditCard', 'PayPalAccount'.
+    console.log(event.paymentMethodIsSelected); // true if a customer has selected a payment method when paymentMethodRequestable fires
+
+    submitButton.removeAttribute('disabled');
+  });
+
+  dropinInstance.on('noPaymentMethodRequestable', function () {
+    submitButton.setAttribute('disabled', true);
+  });
+});
+
+
+
+    function onError(err) {
+     var errorType = err.type;//access the error type via err.type
+     var errorMessage = err.message; //access the error message via err
+     //do something helpful for the user via the combination of these two parameters
+     BootstrapDialog.alert({
+       title: 'Error',
+       message: 'Something went wrong with your payment information!<br>' + errorMessage,
+       type: BootstrapDialog.TYPE_DANGER, // <-- Default value is BootstrapDialog.TYPE_PRIMARY
+       closable: true, // <-- Default value is false
+       buttonLabel: 'Close', // <-- Default value is 'OK',
+       callback: function(result) {
+           // result will be true if button was click, while it will be false if users close the dialog directly.
+           // alert('Result is: ' + result);
+       }
+   });
+    }
+
+    function onSuccess() {
+     // var errorType = err.type;//access the error type via err.type
+     // var errorMessage = err.message; //access the error message via err
+     //do something helpful for the user via the combination of these two parameters
+     BootstrapDialog.alert({
+       title: 'Error',
+       message: 'Something went wrong with your payment information!<br>' + errorMessage,
+       type: BootstrapDialog.TYPE_SUCCESS, // <-- Default value is BootstrapDialog.TYPE_PRIMARY
+       closable: true, // <-- Default value is false
+       buttonLabel: 'Close', // <-- Default value is 'OK',
+       callback: function(result) {
+           // result will be true if button was click, while it will be false if users close the dialog directly.
+           // alert('Result is: ' + result);
+       }
+   });
+    }
+
+// change amount values
+// const rangeInput = document.querySelector('#vinput');
+// const switchInput = document.querySelector('#vinput');
+//
+// const output = document.querySelector('#voutput');
+//
+// function setDefaultState() {
+//   output.value = rangeInput.value;
+// }
+//
+// rangeInput.addEventListener('input', function(){
+//   output.value = this.value;
+// });
+
+const tierInput = document.getElementsByName("tier");
+const tierValues = {
+  't1': 25,
+  't2': 100,
+  't3': 250,
+  't4': 500
+}
+
+
+function calcValues() {
+  tierAmount = calcTier();
+
+    if (document.getElementById("annual").checked) {
+      console.log("annual");
+        amount.value = tierAmount * 12;
+    } else if (document.getElementById("monthly").checked) {
+      console.log("monthly");
+      amount.value = tierAmount;
+    };
+
+
+}
+
+function calcTier() {
+  for (var tier in tierInput) {
+      if (tierInput[tier].checked) {
+        selectedTier = tierInput[tier]
+        if (selectedTier.id in tierValues) {
+           tierAmount = tierValues[selectedTier.id];
+        }
+        else {
+          tierAmount= 25;
+        }
+      }
+  }
+  return tierAmount;
+}
+
+function calcAnnual() {
+  function updateAmount() {
+    if (document.getElementById("annual").checked) {
+      console.log("annual");
+        amount.value = amount.value * 12;
+    } else if (document.getElementById("monthly").checked) {
+      console.log("monthly");
+      amount.value = amount.value/12;
+    };
+
+  }
+}
+
+
+  // function updateTier() {
+  //   for (var tier in tierInput) {
+  //       if (tierInput[tier].checked) {
+  //         selectedTier = tierInput[tier]
+  //         if (selectedTier.id in tierValues) {
+  //            amount.value = tierValues[selectedTier.id];
+  //         }
+  //         else {
+  //           amount.value = 25;
+  //         }
+  //       }
+  //   }
+  // }
+  //
+  // function updateAmount() {
+  //   if (document.getElementById("annual").checked) {
+  //     console.log("annual");
+  //       amount.value = amount.value * 12;
+  //   } else if (document.getElementById("monthly").checked) {
+  //     console.log("monthly");
+  //     amount.value = amount.value/12;
+  //   };
+  //
+  // }
+
+
+
+document.addEventListener('DOMContentLoaded', function(){
+calcValues();
+
+});
+
+</script>
 
 {% endblock %}
