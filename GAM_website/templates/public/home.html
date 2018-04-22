@@ -13,6 +13,10 @@
     </div>
 </header>
 
+{% if error %}
+  <p class=error><strong>Error:</strong> {{ error }}
+{% endif %}
+
 <!-- Services Section -->
 <section id="why">
     <div class="container">
@@ -288,7 +292,7 @@ Membership with Green Again provides you with a section of rainforest to adopt a
 $(document).ready(function() {
     var messages = "{{ get_flashed_messages() }}";
 
-    if (typeof messages != 'undefined' && messages != '[]') {
+    if (messages == '[&#39;success&#39;]') {
       BootstrapDialog.show({
           title: 'Confirmation',
           type: BootstrapDialog.TYPE_SUCCESS,
@@ -308,7 +312,29 @@ $(document).ready(function() {
               }
           }]
       });
+    } else if (messages != '[]' ) {
+        BootstrapDialog.show({
+            type: BootstrapDialog.TYPE_WARNING,
+            message: messages,
+            buttons: [{
+                id: 'btn-ok',
+                icon: 'glyphicon glyphicon-check',
+                label: 'OK',
+                cssClass: 'btn-primary',
+                data: {
+                    js: 'btn-confirm',
+                    'user-id': '3'
+                },
+                autospin: false,
+                action: function(dialogRef){
+                    dialogRef.close();
+                }
+            }]
+        });
+
+
     };
+
 });
 </script>
 
