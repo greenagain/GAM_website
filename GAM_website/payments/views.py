@@ -74,43 +74,58 @@ def create_checkout():
     #             "store_in_vault_on_success": True,
     #         }
     #     })
+
     # recurring payments
     customer_result = braintree.Customer.create({
         'first_name': request.form['first_name'],
         'last_name': request.form['last_name'],
         'email': request.form['email'],
-        "payment_method_nonce": request.form['payment_method_nonce']
+        "payment_method_nonce": "fake-valid-no-billing-address-nonce"
     })
 
     if customer_result.is_success:
         customer_id = customer_result.customer.id
-        payment_token = customer_result.customer.payment_methods[0].token
-    # import pdb; pdb.set_trace()
-        result = braintree.Subscription.create({
-            # 'payment_method_nonce': request.form['payment_method_nonce'],
-            "payment_method_token": payment_token,
-            # type
-            "plan_id": str(request.form['options'] + request.form['tier']),
-            # "price": request.form['amount'],
-            "options": {
-                "start_immediately": True
-                }
-        })
-
-
+        try:
+            payment_token = customer_result.customer.payment_methods[0].token
+            result = braintree.Subscription.create({
+                # 'payment_method_nonce': request.form['payment_method_nonce'],
+                "payment_method_token": payment_token,
+                # type
+                "plan_id": str(request.form['options'] + request.form['tier']),
+                # "price": request.form['amount'],
+                "options": {
+                    "start_immediately": True
+                    }
+            })
+        except Exception as e:
+            print("exception,", e)
+            result = braintree.Subscription.create({
+                # 'payment_method_nonce': request.form['payment_method_nonce'],
+                'payment_method_nonce': "fake-valid-no-billing-address-nonce",
+                # "payment_method_token": payment_token,
+                # type
+                "plan_id": str(request.form['options'] + request.form['tier']),
+                # "price": request.form['amount'],
+                "options": {
+                    "start_immediately": True
+                    }
+            })
 
     # return redirect(url_for('public.home'))
-    if result.is_success or result.transaction:
-        flash("success")
-        return redirect(url_for('public.home'))
-        # return redirect(url_for('payments.show_checkout',transaction_id=result.transaction.id))
+    if result:
+        # import pdb; pdb.set_trace()
+        if (result.is_success == True or result.transaction):
+            flash("success")
+            return redirect(url_for('public.home'))
+            # return redirect(url_for('payments.show_checkout',transaction_id=result.transaction.id))
+        else:
+            for error in result.errors.deep_errors:
+                print("ERROR")
+                print(error.code)
+                print(error.message)
+                flash('Error: %s: %s' % (error.code, error.message))
+            return redirect(url_for('public.home'))
     else:
-        for error in result.errors.deep_errors:
-            print("ERROR")
-            print(error.code)
-            print(error.message)
-
-
         for x in result.errors.deep_errors:
             flash('Error: %s: %s' % (x.code, x.message))
-        return redirect(url_for('payments.new_checkout'))
+        return redirect(url_for('public.home'))
