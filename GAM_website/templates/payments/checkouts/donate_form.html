@@ -134,10 +134,9 @@
 <script src="https://js.braintreegateway.com/web/dropin/1.10.0/js/dropin.min.js"></script>
 <script>
 
-var form = document.querySelector('#payment-form');
+var payment_form = document.querySelector('#payment-form');
 var nonceInput = document.querySelector('#nonce');
 
-  var form = document.querySelector('#payment-form');
   var client_token = '{{ client_token }}';
   var submitButton = document.querySelector('#submit-button');
 
@@ -146,13 +145,14 @@ var nonceInput = document.querySelector('#nonce');
       container: '#bt-dropin'
     }, function (err, dropinInstance) {
   submitButton.addEventListener('click', function () {
-    dropinInstance.requestPaymentMethod(function (err, payload) {
-      nonceInput.value = payload.nonce;
-      if (form.email.checkValidity()){
-        form.submit();
-      }
-
-    });
+    //disabled but keeping for ajax
+    // dropinInstance.requestPaymentMethod(function (err, payload) {
+    //   nonceInput.value = payload.nonce;
+    //   if (payment_form.email.checkValidity()){
+    //     // payment_form.submit();
+    //   }
+    //
+    // });
   });
 
   if (dropinInstance.isPaymentMethodRequestable()) {
