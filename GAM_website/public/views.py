@@ -23,25 +23,25 @@ def load_user(user_id):
     return User.get_by_id(int(user_id))
 
 
-@blueprint.route('/', methods=['GET', 'POST'])
+@blueprint.route('/', methods=['GET'])
 def home():
     """Home page."""
-    form = LoginForm(request.form)
+    # form = LoginForm(request.form)
     client_token = braintree.ClientToken.generate()
     # Handle logging in
-    if request.method == 'POST':
-        # return redirect(url_for('payments.create_checkout'))
-        # flash('You are logged in.', 'success')
-        if form.validate_on_submit():
-            pass
-        #     login_user(form.user)
-        #     flash('You are logged in.', 'success')
-        #     redirect_url = request.args.get('next') or url_for('user.members')
-        #     return redirect(redirect_url)
-        else:
-            pass
+    # if request.method == 'POST':
+    #     # return redirect(url_for('payments.create_checkout'))
+    #     # flash('You are logged in.', 'success')
+    #     if form.validate_on_submit():
+    #         pass
+    #     #     login_user(form.user)
+    #     #     flash('You are logged in.', 'success')
+    #     #     redirect_url = request.args.get('next') or url_for('user.members')
+    #     #     return redirect(redirect_url)
+    #     else:
+    #         pass
             # flash_errors(form)
-    return render_template('public/home.html', form=form, client_token=client_token)
+    return render_template('public/home.html', client_token=client_token)
 
 
 @blueprint.route('/logout/')
