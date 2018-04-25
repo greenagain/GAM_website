@@ -75,6 +75,7 @@ def create_checkout():
     #         }
     #     })
 
+
     # recurring payments
     if os.environ.get('BT_ENVIRONMENT') == 'sandbox':
         customer_result = braintree.Customer.create({
@@ -101,6 +102,7 @@ def create_checkout():
                 # type
                 "plan_id": str(request.form['options'] + request.form['tier']),
                 # "price": request.form['amount'],
+
                 # "options": {
                 #     "start_immediately": True
                 #     }
@@ -130,6 +132,7 @@ def create_checkout():
                 print(error.message)
                 flash('Error: %s: %s' % (error.code, error.message))
             return redirect(url_for('public.home'))
+
     elif not customer_result.is_success:
         print("ERROR")
         error_code = "No Customer,"
