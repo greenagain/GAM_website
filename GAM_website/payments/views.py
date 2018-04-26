@@ -59,6 +59,7 @@ def show_checkout(transaction_id):
 @blueprint.route('/payments/checkouts', methods=['POST'])
 def create_checkout():
     print(request.form)
+    result = None
     # single non subscription payment (should this be possible?)
     # if 'recurring' not in request.form:
     #     result = braintree.Transaction.sale({
@@ -112,7 +113,9 @@ def create_checkout():
             result = None
     except Exception as e:
         print("exception,", e)
-        result = None
+        result = e
+        result.error = e
+        result.is_success = False
         return result
 
 
@@ -126,11 +129,19 @@ def create_checkout():
             return redirect(url_for('public.home'))
             # return redirect(url_for('payments.show_checkout',transaction_id=result.transaction.id))
         else:
-            for error in result.errors.deep_errors:
-                print("ERROR")
-                print(error.code)
-                print(error.message)
-                flash('Error: %s: %s' % (error.code, error.message))
+            if result.errors:
+                for error in result.errors.deep_errors:
+                    print("ERROR")
+                    print(error.code)
+                    print(error.message)
+                    flash('Error: %s: %s' % (error.code, error.message))
+            else:
+                print("RESULT ERROR")
+                error_code = "Please try again! An error occcured: "
+                error.message = result.error
+                print(result.e)
+                flash('Error: %s: %s' % (error_code, error.message))
+
             return redirect(url_for('public.home'))
 
     elif not customer_result.is_success:
@@ -140,4 +151,8 @@ def create_checkout():
         flash('Error: %s: %s' % (error_code, customer_result.message))
         return redirect(url_for('public.home'))
     else:
+        print("some error")
+        error_code = "Please try again! An error occcured: "
+        print(e)
+        flash('Error: %s: %s' % (error_code, e))
         return redirect(url_for('public.home'))
