@@ -143,3 +143,7 @@ def create_checkout():
         flash('Error: %s: %s' % (error_code, customer_result.message))
         return redirect(url_for('public.home'))
     else:
+        print("ERROR")
+        flash('Error: %s: %s' % ("General Error:", "contact us for details"))
+        return redirect(url_for('public.home'))
+        return redirect(url_for('public.home'))
