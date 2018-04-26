@@ -112,8 +112,12 @@ def create_checkout():
             print("no subscription created")
             result = None
     except Exception as e:
-        print("exception,", e)
-        pass
+        print("ERROR")
+        error_code = "An error occured:"
+        print(e)
+        flash('Error: %s: %s' % (error_code, e))
+        return redirect(url_for('public.home'))
+
 
 
     # return redirect(url_for('public.home'))
@@ -139,8 +143,3 @@ def create_checkout():
         flash('Error: %s: %s' % (error_code, customer_result.message))
         return redirect(url_for('public.home'))
     else:
-        print("some error")
-        error_code = "Please try again! An error occcured: "
-        print(e)
-        flash('Error: %s: %s' % (error_code, e))
-        return redirect(url_for('public.home'))
