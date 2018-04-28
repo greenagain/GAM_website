@@ -82,13 +82,14 @@
 
 </script>
 
+<input type="hidden" id="nonce" name="payment_method_nonce" />
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <div class="col-lg-12 text-left">
           <button id="submit-button" type="submit" class=
           "btn btn-xl btn-info btn-lg" data-toggle="modal" data-target="_blank" disabled="true" >Submit</button>
             <!-- <button id="submit-button">Request payment method</button> -->
         </div>
-        <input type="hidden" id="nonce" name="payment_method_nonce" />
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
       </form>
 
 
@@ -143,11 +144,17 @@ var nonceInput = document.querySelector('#nonce');
   braintree.dropin.create({
       authorization: '{{client_token}}',
       container: '#bt-dropin'
-    }, function (err, dropinInstance) {
+    }, function (createErr, dropinInstance) {
   submitButton.addEventListener('submit', function () {
+    event.preventDefault();
     //disabled but keeping for ajax
     dropinInstance.requestPaymentMethod(function (err, payload) {
-      nonceInput.value = payload.nonce;
+      if (err) {
+  console.log('Error', err);
+  return;
+}
+document.querySelector('#nonce').value = payload.nonce;
+
       if (payment_form.email.checkValidity()){
         payment_form.submit();
       }
