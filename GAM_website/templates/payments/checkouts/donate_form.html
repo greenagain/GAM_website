@@ -144,15 +144,15 @@ var nonceInput = document.querySelector('#nonce');
       authorization: '{{client_token}}',
       container: '#bt-dropin'
     }, function (err, dropinInstance) {
-  submitButton.addEventListener('click', function () {
+  submitButton.addEventListener('submit', function () {
     //disabled but keeping for ajax
-    // dropinInstance.requestPaymentMethod(function (err, payload) {
-    //   nonceInput.value = payload.nonce;
-    //   if (payment_form.email.checkValidity()){
-    //     // payment_form.submit();
-    //   }
-    //
-    // });
+    dropinInstance.requestPaymentMethod(function (err, payload) {
+      nonceInput.value = payload.nonce;
+      if (payment_form.email.checkValidity()){
+        payment_form.submit();
+      }
+
+    });
   });
 
   if (dropinInstance.isPaymentMethodRequestable()) {
