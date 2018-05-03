@@ -85,7 +85,7 @@ def terms():
 @blueprint.route('/privacy/')
 def privacy():
     """Privacy Policy Page"""
-    return render_template('public/terms.html')
+    return render_template('public/privacy.html')
 
 
 # @blueprint.route('/about/')
