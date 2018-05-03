@@ -11,8 +11,8 @@ from GAM_website.user.forms import RegisterForm
 from GAM_website.user.models import User
 from GAM_website.utils import flash_errors
 
- @app.before_request
- def before_request():
+@app.before_request
+def before_request():
     if request.url.startswith('https://gam-payments-sandbox.herokuapp.com/'):
         url = request.url.replace('https://gam-payments-sandbox.herokuapp.com/', 'https://greenagainmadagascar.org/', 1)
         code = 301
