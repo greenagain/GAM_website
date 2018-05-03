@@ -79,7 +79,12 @@ def register():
 
 @blueprint.route('/terms/')
 def terms():
-    """Terms + Privacy Page"""
+    """Terms of Use Page"""
+    return render_template('public/terms.html')
+
+@blueprint.route('/privacy/')
+def terms():
+    """Privacy Policy Page"""
     return render_template('public/terms.html')
 
 
