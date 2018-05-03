@@ -1,7 +1,8 @@
 
 {% extends "layout.html" %}
-{% block content %}
 
+{% block content %}
+{% include "nav.html" %}
 <header style="background-image: url({{ url_for('static', filename='img/home_cover.jpg') }})">
     <div class="container">
         <div class="intro-text">
@@ -251,7 +252,7 @@
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group">
-                                <input type="tel" class="form-control" placeholder="Phone" name="phone" id="phone" data-validation-required-message="Please enter your phone number.">
+                                <input type="tel" class="form-control" placeholder="Phone" name="phone" id="phone">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>

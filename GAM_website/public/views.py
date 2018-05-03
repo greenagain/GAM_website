@@ -10,6 +10,18 @@ from GAM_website.user.forms import RegisterForm
 from GAM_website.user.models import User
 from GAM_website.utils import flash_errors
 
+# =============================================================
+# Test code added by Nate in order to attempt redirecting from
+# 'https://green-again.org' to https://greenagainmadagascar.org
+# =============================================================
+#
+# @app.before_request
+# def before_request():
+#    if request.url.startswith('http://green-again.org/'):
+#        url = request.url.replace('http://green-again.org', 'https://greenagainmadagascar.org/', 1)
+#        code = 301
+#       return redirect(url, code=code)
+
 
 blueprint = Blueprint('public', __name__, static_folder='../static')
 
@@ -23,7 +35,7 @@ def load_user(user_id):
     return User.get_by_id(int(user_id))
 
 
-@blueprint.route('/', methods=['GET'])
+@blueprint.route('/', methods=['GET', 'POST'])
 def home():
     """Home page."""
     # form = LoginForm(request.form)
@@ -65,12 +77,19 @@ def register():
         flash_errors(form)
     return render_template('public/register.html', form=form)
 
+@blueprint.route('/terms/')
+def terms():
+    """Terms + Privacy Page"""
+    return render_template('public/terms.html')
 
-@blueprint.route('/about/')
-def about():
-    """About page."""
-    form = LoginForm(request.form)
-    return render_template('public/about.html', form=form)
+
+# @blueprint.route('/about/')
+# def about():
+#     """About page."""
+#     form = LoginForm(request.form)
+#     return render_template('public/about.html', form=form)
+
+
 
 # @blueprint.route('/donate/')
 # def about():

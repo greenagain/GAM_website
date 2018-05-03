@@ -6,6 +6,7 @@ from GAM_website import commands, public, user, payments
 from GAM_website.assets import assets
 from GAM_website.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate
 from GAM_website.settings import ProdConfig
+from flask_sslify import SSLify
 
 
 
@@ -21,6 +22,7 @@ def create_app(config_object=ProdConfig):
     register_errorhandlers(app)
     register_shellcontext(app)
     register_commands(app)
+    sslify = SSLify(app)
     return app
 
 
