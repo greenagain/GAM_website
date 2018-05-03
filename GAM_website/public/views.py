@@ -11,7 +11,7 @@ from GAM_website.user.models import User
 from GAM_website.utils import flash_errors
 
 # =============================================================
-# Test code added by Nate in order to attempt redirecting from 
+# Test code added by Nate in order to attempt redirecting from
 # 'https://green-again.org' to https://greenagainmadagascar.org
 # =============================================================
 #
@@ -35,7 +35,7 @@ def load_user(user_id):
     return User.get_by_id(int(user_id))
 
 
-@blueprint.route('/', methods=['GET'])
+@blueprint.route('/', methods=['GET', 'POST'])
 def home():
     """Home page."""
     # form = LoginForm(request.form)
