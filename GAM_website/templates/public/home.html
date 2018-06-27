@@ -343,9 +343,15 @@ $(document).ready(function() {
     Flexio.setup("xdttbqddtxbqznvktstv")
     Flexio.pipe("greenagain-contact-form").run({data: formdata})
 
+    //display an alert message letting the use know the message was sent
     alert("Thanks for your message. We'll be in touch with you soon.")
-//    form.style = "display:none"
-//    document.getElementById('thank-you').innerHTML = "<b>Your message was sent. Thank you for writing!</b>"
+
+    //clear out the contents of the contact form after displaying the alert
+    document.getElementById('name').value = ''
+    document.getElementById('email').value = ''
+    document.getElementById('phone').value = ''
+    document.getElementById('message').value = ''
+    
 }
 
 });
